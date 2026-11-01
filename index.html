@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>সুপার পাওয়ার গ্রুপ | E-Commerce & Electrical Services</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+
+    <!-- Top Banner: Local Geofencing / Offers -->
+    <div class="bg-yellow-400 text-gray-900 text-sm font-bold py-2 text-center px-4">
+        ⚡ আপনার এলাকা সিলেক্ট করুন: আমাদের দোকানের আশেপাশের গ্রাহকদের জন্য <span class="underline">ফ্রি ডেলিভারি</span> ও <span class="underline">ফ্রি মেইনটেনেন্স</span> সেবা!
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="bg-slate-900 text-white sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <i class="fa-solid fa-bolt text-yellow-400 text-2xl"></i>
+                <span class="text-xl font-bold tracking-wide">সুপার পাওয়ার গ্রুপ</span>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button onclick="toggleCart()" class="relative p-2 text-gray-200 hover:text-yellow-400">
+                    <i class="fa-solid fa-cart-shopping text-xl"></i>
+                    <span id="cart-count" class="absolute -top-1 -right-1 bg-red-600 text-xs px-1.5 py-0.5 rounded-full text-white">0</span>
+                </button>
+                <button onclick="openAdminModal()" class="bg-yellow-500 hover:bg-yellow-600 text-slate-900 px-3 py-1.5 rounded font-bold text-sm">
+                    <i class="fa-solid fa-lock mr-1"></i> অ্যাডমিন প্যানেল
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Hero Banner -->
+    <section class="bg-slate-800 text-white py-12 px-4 text-center">
+        <h1 class="text-3xl md:text-5xl font-extrabold mb-3">সব ধরনের ইলেকট্রিক্যাল ও কনস্ট্রাকশন সমাধান</h1>
+        <p class="text-gray-300 max-w-2xl mx-auto mb-6">নিজস্ব ব্র্যান্ডের ইলেকট্রিক সামগ্রী, থার্ড-পার্টি মালামাল এবং দক্ষ ইলেকট্রিশিয়ান সেবা একই স্থানে।</p>
+        <div class="flex justify-center gap-3">
+            <a href="#products" class="bg-yellow-400 text-slate-900 font-bold px-5 py-2.5 rounded hover:bg-yellow-500">প্রোডাক্টস দেখুন</a>
+            <a href="#services" class="bg-transparent border border-white text-white font-bold px-5 py-2.5 rounded hover:bg-white hover:text-slate-900">ইলেকট্রিশিয়ান বুক করুন</a>
+        </div>
+    </section>
+
+    <!-- Category Filters -->
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <div class="flex flex-wrap gap-2 mb-6 border-b pb-4">
+            <button onclick="filterCategory('all')" class="bg-slate-900 text-white px-4 py-1.5 rounded-full text-sm font-semibold">সবকিছু</button>
+            <button onclick="filterCategory('own')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-1.5 rounded-full text-sm font-semibold">নিজস্ব মালামাল</button>
+            <button onclick="filterCategory('vendor')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-1.5 rounded-full text-sm font-semibold">অন্যান্য ব্র্যান্ড</button>
+            <button onclick="filterCategory('construction')" class="bg-gray-200 hover:bg-gray-300 text-gray-800 px-4 py-1.5 rounded-full text-sm font-semibold">কনস্ট্রাকশন মালামাল</button>
+        </div>
+
+        <!-- Product Grid -->
+        <h2 id="products" class="text-2xl font-bold mb-4 text-slate-900">দৈনিক নতুন আপডেট প্রোডাক্টস</h2>
+        <div id="product-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Dynamic Products will load here via JavaScript -->
+        </div>
+
+        <!-- Electrician / Booking Services Section -->
+        <section id="services" class="mt-16 bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+            <h2 class="text-2xl font-bold mb-2 text-slate-900">হাউজ ওয়্যারিং ও ইলেকট্রিশিয়ান বুকিং</h2>
+            <p class="text-gray-600 mb-6 text-sm">বাসা-বাড়ি বা কনস্ট্রাকশন সাইটের কাজের জন্য অভিজ্ঞতা সম্পন্ন ইলেকট্রিশিয়ান পান।</p>
+            <form onsubmit="handleServiceBooking(event)" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <input type="text" placeholder="আপনার নাম" required class="p-2 border rounded text-sm w-full">
+                <input type="tel" placeholder="মোবাইল নম্বর" required class="p-2 border rounded text-sm w-full">
+                <select class="p-2 border rounded text-sm w-full">
+                    <option>হাউজ ওয়্যারিং কাজ</option>
+                    <option>ইলেকট্রিক্যাল মেরামত</option>
+                    <option>কনস্ট্রাকশন সাইট সেটআপ</option>
+                </select>
+                <button type="submit" class="md:col-span-3 bg-slate-900 text-white py-2 rounded font-bold hover:bg-slate-800">বুকিং কনফার্ম করুন</button>
+            </form>
+        </section>
+    </main>
+
+    <!-- Payment & Checkout Drawer -->
+    <div id="cart-drawer" class="fixed inset-y-0 right-0 w-full max-w-md bg-white shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out z-50 p-6 overflow-y-auto">
+        <div class="flex justify-between items-center border-b pb-4 mb-4">
+            <h3 class="text-xl font-bold">আপনার কার্ট ও পেমেন্ট</h3>
+            <button onclick="toggleCart()" class="text-gray-500 hover:text-black"><i class="fa-solid fa-xmark text-xl"></i></button>
+        </div>
+
+        <div id="cart-items" class="space-y-3 mb-4">
+            <!-- Items populated via JS -->
+        </div>
+
+        <div class="border-t pt-4">
+            <div class="flex justify-between font-bold text-lg mb-4">
+                <span>মোট বিল:</span>
+                <span id="cart-total">৳0</span>
+            </div>
+
+            <!-- Payment Gateways & Manual Instructions -->
+            <h4 class="font-bold text-sm mb-2 text-gray-700">পেমেন্ট মেথড সিলেক্ট করুন:</h4>
+            <div class="space-y-2 mb-4">
+                <div class="p-2 border rounded flex items-center justify-between text-xs font-semibold bg-gray-50">
+                    <span><i class="fa-solid fa-mobile-screen text-pink-600 mr-2"></i>bKash / Nagad / Rocket (Merchant)</span>
+                    <span class="text-slate-900">01700-000000</span>
+                </div>
+                <div class="p-2 border rounded flex items-center justify-between text-xs font-semibold bg-gray-50">
+                    <span><i class="fa-solid fa-building-columns text-blue-600 mr-2"></i>ব্যাংক অ্যাকাউন্ট (Dutch Bangla)</span>
+                    <span class="text-slate-900">123.456.7890</span>
+                </div>
+                <div class="p-2 border rounded flex items-center justify-between text-xs font-semibold bg-gray-50">
+                    <span><i class="fa-solid fa-qrcode text-emerald-600 mr-2"></i>Bangla QR / PayPal</span>
+                    <span class="text-slate-900">Scan at Counter</span>
+                </div>
+            </div>
+
+            <button onclick="completeCheckout()" class="w-full bg-emerald-600 text-white font-bold py-2.5 rounded hover:bg-emerald-700">অর্ডার কনফার্ম করুন (ক্যাশ / পেমেন্ট)</button>
+        </div>
+    </div>
+
+    <!-- Protected Admin Panel Modal -->
+    <div id="admin-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-lg p-6 max-w-lg w-full">
+            <div class="flex justify-between items-center mb-4 border-b pb-2">
+                <h3 class="text-xl font-bold text-red-600"><i class="fa-solid fa-shield-halved"></i> সিকিউর অ্যাডমিন প্যানেল</h3>
+                <button onclick="closeAdminModal()" class="text-gray-500"><i class="fa-solid fa-xmark text-xl"></i></button>
+            </div>
+
+            <!-- Admin Authentication -->
+            <div id="admin-login-box">
+                <p class="text-xs text-gray-500 mb-3">ওয়েবসাইটের মালিক ছাড়া অন্য কারো জন্য প্রবেশ নিষেধ।</p>
+                <input type="password" id="admin-pass" placeholder="অ্যাডমিন সিকিউরিটি পাসওয়ার্ড দিন" class="w-full p-2 border rounded mb-3 text-sm">
+                <button onclick="verifyAdmin()" class="w-full bg-slate-900 text-white font-bold py-2 rounded text-sm">লগইন করুন</button>
+            </div>
+
+            <!-- Admin Controls (Hidden until verified) -->
+            <div id="admin-controls" class="hidden space-y-3">
+                <h4 class="font-bold text-sm text-gray-700">নতুন প্রোডাক্ট যোগ করুন (দৈনিক আপডেট)</h4>
+                <input type="text" id="new-prod-name" placeholder="প্রোডাক্টের নাম" class="w-full p-2 border rounded text-xs">
+                <input type="number" id="new-prod-price" placeholder="দাম (টাকা / SAR)" class="w-full p-2 border rounded text-xs">
+                <select id="new-prod-cat" class="w-full p-2 border rounded text-xs">
+                    <option value="own">নিজস্ব মালামাল</option>
+                    <option value="vendor">অন্যান্য ব্র্যান্ড</option>
+                    <option value="construction">কনস্ট্রাকশন মালামাল</option>
+                </select>
+                <button onclick="addNewProduct()" class="w-full bg-green-600 text-white font-bold py-2 rounded text-xs">পাবলিশ করুন</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Application JavaScript Logic -->
+    <script>
+        // Default Mock Data for Products
+        let products = [
+            { id: 1, name: "সুপার পাওয়ার গ্যাং সুইচ", price: 250, category: "own", img: "https://via.placeholder.com/150" },
+            { id: 2, name: "হাউজ ওয়্যারিং ক্যাবল ১.৫ মিমি", price: 3200, category: "own", img: "https://via.placeholder.com/150" },
+            { id: 3, name: "কনস্ট্রাকশন ডিস্ট্রিবিউশন বক্স", price: 1800, category: "construction", img: "https://via.placeholder.com/150" },
+            { id: 4, name: "ব্র্যান্ডেড সিকেটি ব্রেকার", price: 450, category: "vendor", img: "https://via.placeholder.com/150" }
+        ];
+
+        let cart = [];
+        const ADMIN_PIN = "1234"; // শুধুমাত্র ওনারের জন্য গোপন পাসওয়ার্ড (অ্যাডমিন পিন)
+
+        // Render products to UI
+        function renderProducts(items) {
+            const container = document.getElementById('product-container');
+            container.innerHTML = '';
+            items.forEach(p => {
+                container.innerHTML += `
+                    <div class="bg-white rounded border p-4 shadow-sm hover:shadow-md transition">
+                        <img src="${p.img}" alt="${p.name}" class="w-full h-36 object-cover mb-3 rounded">
+                        <span class="text-xs font-semibold px-2 py-0.5 rounded bg-gray-100 text-gray-600 uppercase">${p.category}</span>
+                        <h3 class="font-bold text-slate-900 mt-2">${p.name}</h3>
+                        <p class="text-emerald-600 font-bold mt-1">৳ ${p.price}</p>
+                        <button onclick="addToCart(${p.id})" class="mt-3 w-full bg-slate-900 text-white text-xs py-2 rounded font-bold hover:bg-yellow-500 hover:text-slate-900 transition">কার্টে যোগ করুন</button>
+                    </div>
+                `;
+            });
+        }
+
+        function filterCategory(cat) {
+            if (cat === 'all') renderProducts(products);
+            else renderProducts(products.filter(p => p.category === cat));
+        }
+
+        function addToCart(id) {
+            const item = products.find(p => p.id === id);
+            cart.push(item);
+            document.getElementById('cart-count').innerText = cart.length;
+            updateCartUI();
+        }
+
+        function toggleCart() {
+            document.getElementById('cart-drawer').classList.toggle('translate-x-full');
+        }
+
+        function updateCartUI() {
+            const list = document.getElementById('cart-items');
+            list.innerHTML = '';
+            let total = 0;
+            cart.forEach((item, idx) => {
+                total += item.price;
+                list.innerHTML += `
+                    <div class="flex justify-between items-center text-sm border-b pb-2">
+                        <span>${item.name}</span>
+                        <span class="font-bold">৳${item.price}</span>
+                    </div>
+                `;
+            });
+            document.getElementById('cart-total').innerText = '৳' + total;
+        }
+
+        function completeCheckout() {
+            if (cart.length === 0) return alert('আপনার কার্ট খালি!');
+            alert('ধন্যবাদ! আপনার অর্ডারটি গ্রহণ করা হয়েছে। ফ্রি ডেলিভারি স্ট্যাটাস চেক করতে আপনাকে কল করা হবে।');
+            cart = [];
+            document.getElementById('cart-count').innerText = '0';
+            updateCartUI();
+            toggleCart();
+        }
+
+        function handleServiceBooking(e) {
+            e.preventDefault();
+            alert('ইলেকট্রিশিয়ান বুকিং রিকোয়েস্ট সফল হয়েছে! নিকটস্থ শপ থেকে প্রতিনিধি আপনার সাথে যোগাযোগ করবে।');
+        }
+
+        // Admin Security System Logic
+        function openAdminModal() { document.getElementById('admin-modal').classList.remove('hidden'); }
+        function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); }
+
+        function verifyAdmin() {
+            const pass = document.getElementById('admin-pass').value;
+            if (pass === ADMIN_PIN) {
+                document.getElementById('admin-login-box').classList.add('hidden');
+                document.getElementById('admin-controls').classList.remove('hidden');
+            } else {
+                alert('ভুল পাসওয়ার্ড! একমাত্র মালিক ব্যতীত প্রবেশ নিষেধ।');
+            }
+        }
+
+        function addNewProduct() {
+            const name = document.getElementById('new-prod-name').value;
+            const price = Number(document.getElementById('new-prod-price').value);
+            const category = document.getElementById('new-prod-cat').value;
+
+            if(!name || !price) return alert('সব তথ্য পুরণ করুন');
+
+            const newProd = { id: Date.now(), name, price, category, img: "https://via.placeholder.com/150" };
+            products.unshift(newProd);
+            renderProducts(products);
+            alert('নতুন প্রোডাক্ট সফলভাবে লাইভ করা হয়েছে!');
+            closeAdminModal();
+        }
+
+        // Load all items initially
+        renderProducts(products);
+    </script>
+</body>
+</html>
